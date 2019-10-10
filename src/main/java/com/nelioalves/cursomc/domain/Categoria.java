@@ -2,11 +2,20 @@ package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
-	private String nome;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //Isso faz gerar o Id automatico o IDENTITY da certo com Varios Bancos.
+	private Integer id;                               //dependendo do banco vamos ter que escolher outro tipo de geração de
+	private String nome;                              //chave primaria
 	
 	public Categoria() {
 		
