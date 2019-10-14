@@ -1,11 +1,14 @@
 package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 
 @Entity
@@ -16,6 +19,10 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //Isso faz gerar o Id automatico o IDENTITY da certo com Varios Bancos.
 	private Integer id;                               //dependendo do banco vamos ter que escolher outro tipo de geração de
 	private String nome;                              //chave primaria
+	
+	//Esse nome produtos é o papel que esta no diagrama do banco
+	@ManyToMany(mappedBy="categorias") //Não pe necessário fazer todo aquele mapeamento =  a classe Produto.java
+	private List<Produto> produtos = new ArrayList<>();
 	
 	public Categoria() {
 		
@@ -42,6 +49,14 @@ public class Categoria implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -67,6 +82,8 @@ public class Categoria implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	
