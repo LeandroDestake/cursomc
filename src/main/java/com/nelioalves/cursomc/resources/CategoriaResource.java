@@ -28,10 +28,12 @@ public class CategoriaResource {
 		
 		//aqui estamos acessando oa camada de serviços
 		Categoria obj = service.buscar(id);
-		
+		//Esse cara aqui vai pegar a excessão da classe public Categoria buscar(Integer id) e mandar um JSON apropriado para resposta http do meu recurso
 		return ResponseEntity.ok().body(obj);//vamos retornar um objeto ResponseEntity que contem protocolos variados como http etc...
 		         //a reesposta vai ter como ok no corpo o obj buscado que é a categoria
-		
+		//poderia colocar try e catch aqui mas não é legar colocar esses tratamentos todos aqui,
+		//Por isso colocamos no pacote services, então para interceptar isso acima,
+		//vamos criar um handler
 	}
 
 }

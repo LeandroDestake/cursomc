@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,11 +25,11 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
+	@JsonBackReference //esta se refrindo ao @JsonManagedReference que esta na classe categoria.java com isso ele omiti a lista de categorias para cada produto desta classe
 	//Agora precisamos fazer o relacionamento de muitos para muitos
 	//entre Produto e categoria muitos p/ muitos vou ter que ter uma
 	//terceira tabela, no JPA quando tem esse tipo de relação precisamos colocar
-	//a anotação ManyToMany, isso pq vamos ter uma lista de cada lado
-	
+	//a anotação ManyToMany, isso pq vamos ter uma lista de cada lado	
 	    @ManyToMany	   
 	    @JoinTable(name = "PRODUTO_CATEGORIA", //"PRODUTO_CATEGORIA É o nome da terceira tabela" //É nessa cara que vamos definir qual vai ser  a tabela que vai fazer o muitos para muitos no banco relacional
 	    	joinColumns = @JoinColumn(name = "produto_id"), //"produto_id" é a chave estrangeira da classe\tabela que estou no caso produto joinColumns é uma declaração, ai atribuimos a anotação @JoinColumn

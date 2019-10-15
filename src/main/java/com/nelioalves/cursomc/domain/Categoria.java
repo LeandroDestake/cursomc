@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 public class Categoria implements Serializable {
@@ -20,6 +22,7 @@ public class Categoria implements Serializable {
 	private Integer id;                               //dependendo do banco vamos ter que escolher outro tipo de geração de
 	private String nome;                              //chave primaria
 	
+	@JsonManagedReference//Com isso avisamos que esta tudo bem em seriallizar os produtos isso é uma referencia gerenciada pelo json isso é uma anotação do pacote jackson import, agente faz isso do lado que queremos que venha os objetos associados
 	//Esse nome produtos é o papel que esta no diagrama do banco
 	@ManyToMany(mappedBy="categorias") //Não pe necessário fazer todo aquele mapeamento =  a classe Produto.java
 	private List<Produto> produtos = new ArrayList<>();
